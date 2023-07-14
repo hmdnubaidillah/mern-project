@@ -19,8 +19,8 @@ app.use(helmet());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+app.use("/user", userRoutes);
 app.use("/", postRoutes);
 app.use("/auth", authRoutes);
-app.use("/user", userRoutes);
 
 app.listen(port, () => console.log(`listening to port ${port}`));

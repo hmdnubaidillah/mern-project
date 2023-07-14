@@ -6,7 +6,7 @@ import User from "../models/User.js";
 export async function getPosts(req, res) {
   try {
     await connectToDb();
-    const posts = await User.find();
+    const posts = await Post.find();
 
     res.status(200).json(posts);
   } catch (error) {
@@ -16,11 +16,11 @@ export async function getPosts(req, res) {
 }
 
 export async function getUserPost(req, res) {
-  const { userId } = req.params;
+  const { postId } = req.params;
 
   try {
     await connectToDb();
-    const userPost = await User.findById(userId);
+    const userPost = await Post.findById(postId);
 
     res.status(200).json(userPost);
   } catch (error) {
@@ -37,7 +37,7 @@ export async function newPost(req, res) {
     await connectToDb();
     const user = await User.findById(userId);
 
-    const newPost = new User({
+    const newPost = new Post({
       userId,
       creator: user.username,
       caption,
@@ -46,15 +46,23 @@ export async function newPost(req, res) {
     });
 
     await newPost.save();
-    return res.status(200).json({ message: "Successfully created a post" });
+    return res.status(200).json({ message: "Successfully created post" });
   } catch (error) {
-    console.log("Failed to create a post, error : ", error);
-    return res.status(500).json({ message: "Failed to create a post" });
+    console.log("Failed to create post, error : ", error);
+    return res.status(500).json({ message: "Failed to create post" });
   }
 }
 
 // delete post
-
 export async function deletePost(req, res) {
-  const { postId } = req.parmas;
+  const { postId } = req.params;
+
+  try {
+    await connectToDb();
+    await Post.findByIdAndDelete(postId);
+    res.status(200).json({ message: "Successfully deleted the post" });
+  } catch (error) {
+    console.log("Failed to delete the post, error : ", error);
+    return res.status(500).json({ message: "Failed to delete the post" });
+  }
 }

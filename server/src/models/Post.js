@@ -5,7 +5,10 @@ const PostSchema = new Schema(
     userId: {
       type: String,
     },
-
+    creator: {
+      type: String,
+      required: true,
+    },
     caption: {
       type: String,
       required: true,

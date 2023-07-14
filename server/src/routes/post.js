@@ -1,14 +1,14 @@
 import express from "express";
-import { getPosts, getUserPost, newPost } from "../controllers/post.js";
+import { getPosts, getUserPost, newPost, deletePost } from "../controllers/post.js";
 
 const router = express.Router();
 
 router.get("/", getPosts);
-router.get("/:userId", getUserPost);
+router.get("/:postId", getUserPost);
 
 router.post("/new", newPost);
 
-router.delete("/delete", () => {});
+router.delete("/delete/:postId", deletePost);
 
 router.patch("/edit", () => {});
 

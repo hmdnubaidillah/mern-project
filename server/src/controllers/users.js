@@ -4,7 +4,7 @@ import { connectToDb } from "../utils/db.js";
 export async function getUsers(req, res) {
   try {
     await connectToDb();
-    const users = await User.find();
+    const users = await User.find({});
 
     res.status(200).json(users);
   } catch (error) {

@@ -4,7 +4,7 @@ import { register } from "../controllers/auth.js";
 
 const router = express.Router();
 
-router.get("/user", getUsers);
+router.get("/", getUsers);
 router.get("/:username", getUser);
 
 router.post("/register", register);
