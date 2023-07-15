@@ -12,8 +12,10 @@ import userRoutes from "./routes/users.js";
 import postRoutes from "./routes/post.js";
 
 dotenv.config();
+
 const app = express();
 const port = 5000;
+
 app.use(cors());
 app.use(helmet());
 app.use(bodyParser.urlencoded({ extended: true }));

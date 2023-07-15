@@ -1,5 +1,5 @@
 import express from "express";
-import { getPosts, getUserPost, newPost, deletePost } from "../controllers/post.js";
+import { getPosts, getUserPost, newPost, deletePost, editPost } from "../controllers/post.js";
 
 const router = express.Router();
 
@@ -10,6 +10,6 @@ router.post("/new", newPost);
 
 router.delete("/delete/:postId", deletePost);
 
-router.patch("/edit", () => {});
+router.patch("/edit/:postId", editPost);
 
 export default router;

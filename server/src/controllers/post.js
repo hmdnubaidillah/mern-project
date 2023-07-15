@@ -66,3 +66,24 @@ export async function deletePost(req, res) {
     return res.status(500).json({ message: "Failed to delete the post" });
   }
 }
+
+// edit post
+export async function editPost(req, res) {
+  const { postId } = req.params;
+  const { caption } = req.body;
+
+  try {
+    await connectToDb();
+
+    const updatedPost = await Post.findByIdAndUpdate(
+      { _id: postId },
+      { caption },
+      { new: true, upsert: true }
+    );
+
+    return res.status(200).json(updatedPost);
+  } catch (error) {
+    console.log("Cant update post, ", error);
+    res.status(500).json({ message: "Cant update post" });
+  }
+}
